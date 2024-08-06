@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
 import type { Schema } from "../amplify/data/resource";
 import { generateClient } from "aws-amplify/data";
+import { Amplify } from "aws-amplify";
+
+
+import outputs from '../amplify_outputs.json';
+
+Amplify.configure(outputs);
 
 const client = generateClient<Schema>();
 
@@ -11,6 +17,7 @@ function App() {
     client.models.Todo.observeQuery().subscribe({
       next: (data) => setTodos([...data.items]),
     });
+    client.queries.function1({ name: "hello" }).then((value)=>console.log(value));
   }, []);
 
   function createTodo() {
