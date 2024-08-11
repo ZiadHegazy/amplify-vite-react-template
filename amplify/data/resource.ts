@@ -13,6 +13,7 @@ const schema = a.schema({
     .query()
     .arguments({
       name: a.string(),
+      
     })
     .returns(a.string())
     .handler(a.handler.function(function1))
